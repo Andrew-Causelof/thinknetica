@@ -13,19 +13,21 @@
   Если все 3 стороны равны, то треугольник равнобедренный и равносторонний, но не прямоугольный.   
   
 =end
-sides = [0,0,0]
+sides = []
 puts "Введите сторону а треугольника"  
- sides[0] = gets.chomp.to_f 
+ a = gets.chomp.to_f 
+ sides << a
  puts "Введите сторону b треугольника"  
- sides[1] = gets.chomp.to_f 
+ b = gets.chomp.to_f
+ sides << b
  puts "Введите сторону c треугольника"  
- sides[2] = gets.chomp.to_f 
- sides.sort! 
- a = sides[0]
- b = sides[1]
- c = sides[2]
+ c = gets.chomp.to_f
+ sides << c 
 
-if a ** 2 + b ** 2 == c ** 2
+ a = sides.max
+ b, c = sides.min(2)
+
+if a**2 + b**2 == c**2
     puts " Треугольник прямоугольный" 
 elsif a == b &&  b == c  
     puts " Треугольник равносторонний"

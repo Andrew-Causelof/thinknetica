@@ -7,14 +7,14 @@ rescue => exception
 =end
 
 puts "Назовите Ваше Имя"  
- user_name = gets.chomp 
+user_name = gets.chomp 
 puts "Какой у вас рост в сантиметрах?"
- weight = Integer(gets) - 110
+weight = Integer(gets) - 110
 
 if weight <= 0 
-    puts "#{user_name} Ваш вес уже оптимальный "
+  puts "#{user_name} Ваш вес уже оптимальный "
 else
-     puts "#{user_name} Ваш Идеальный вес #{weight} кг" 
+  puts "#{user_name} Ваш Идеальный вес #{weight} кг" 
 end 
 
 
