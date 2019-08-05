@@ -10,19 +10,19 @@
 
 Вычислить и вывести на экран итоговую сумму всех покупок в "корзине".
 =end
-purchases = Hash.new{"Корзина Пуста"}
+purchases = Hash.new{}
 
 while true do
   puts "Введите название товара :"
   goods = gets.chomp
-  if goods.downcase == "stop" || goods.downcase == "стоп"
+  if %w[stop стоп].include?(goods.downcase)
     break
   else
     puts "Введите стоимость за единицу товара :"
     price = gets.chomp.to_f
     puts "Введите количество купленного товара :"
     qty = gets.chomp.to_f
-    purchases[goods] = {price: price, qty: qty }
+    purchases[goods] = { price: price, qty: qty }
  end
 end
 

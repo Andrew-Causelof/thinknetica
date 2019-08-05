@@ -19,5 +19,5 @@ else
   days_array = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
 end
 
-data = days_array[month-1] + day
+data = days_array[month - 1] + day
 puts "Порядковый номер даты: #{data}"
