@@ -21,11 +21,11 @@ class Train < Route
   end
 
   def add_wagon
-    speed == 0 ? @wagon += 1 : nil
+    @speed == 0 ? @wagon += 1 : nil
   end
 
   def remove
-    speed == 0 ? @wagon -=1 : nil
+    @speed == 0 ? @wagon -=1 : nil
   end
 
   def setup_route(set_route)
@@ -51,6 +51,5 @@ class Train < Route
       self.route.each { |x| x == @current_station && x != self.route.first ? @current_station = self.previous_station : nil }
     end
   end
-
 
 end

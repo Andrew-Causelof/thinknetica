@@ -14,7 +14,7 @@ def coming(train)
 end
 
 def departure(train)
-  train.delete(train)
+  @train.delete(train)
 end
 
 def listing
