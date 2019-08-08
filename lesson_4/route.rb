@@ -6,11 +6,11 @@ class Route
   end
 
   def delete(station)
-    station != @route.first && station != @route.last ? @route.delete(station) : nil
+    route.delete(station) if station != route.first && station != route.last
   end
 
   def add(station, previous_station = route[0]) # it needs to point the station which one goes before inserting
- @route.each{ |x| x == previous_station ? @route.insert( @route.index(previous_station) + 1, station) : next }
+    previous_station != @route.last ? @route.insert(@route.index(previous_station) + 1, station) : @route.insert(-1, station)
   end
 
 end

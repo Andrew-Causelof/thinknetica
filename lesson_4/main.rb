@@ -1,6 +1,6 @@
-require_relative './class_station.rb'
-require_relative './class_route.rb'
-require_relative './class_train.rb'
+require_relative './station.rb'
+require_relative './route.rb'
+require_relative './train.rb'
 
 #Moscow_NN = ["Moscow", "Serp and Molot", "Karacharovo", "Chukhlinka", "Kuskovo"]
 #Moscow_NN_Hash = {}
