@@ -22,9 +22,9 @@ def listing
   @trains.each do |train|
     puts "Поезда на станции :"
     puts "Номер поезда: #{train.number}, тип поезда : #{train.type}, вагонов в составе : #{train.wagon}"
-     if %w[грузовой cargo].include?(train.type) cargo += 1
-     if %w[пассажирский passenger].include?(train.type) passenger += 1   
-   end
+    if %w[грузовой cargo].include?(train.type) cargo += 1
+    if %w[пассажирский passenger].include?(train.type) passenger += 1
+  end
 puts "На станции #{@name} : #{cargo} грузовых поездов и #{passenger} пассажирских"
 end
 
