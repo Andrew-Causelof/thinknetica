@@ -16,16 +16,17 @@ def departure(train)
   @trains.delete(train)
 end
 
-def listing
-  passenger = 0
-  cargo = 0
-  @trains.each do |train|
-    puts "Поезда на станции :"
-    puts "Номер поезда: #{train.number}, тип поезда : #{train.type}, вагонов в составе : #{train.wagon}"
-    if %w[грузовой cargo].include?(train.type) cargo += 1
-    if %w[пассажирский passenger].include?(train.type) passenger += 1
-  end
-puts "На станции #{@name} : #{cargo} грузовых поездов и #{passenger} пассажирских"
-end
+# Takes type of train and returns quantity (wich ones have same type)
 
+def type_qty(type)
+sum = 0
+  @trains.each do |train|
+  sum += 1  if type.include?(@train.type)
+  end
+  if sum.zero?
+    puts "В данный момент поездов с типом #{type} нет!"
+  else
+    puts " В данный момент поездов с типом #{type} : #{sum}"
+  end
+end
 end
