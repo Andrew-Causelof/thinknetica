@@ -1,7 +1,7 @@
 
 # Class Train, describs what Train does
 class Train
-  attr_reader :speed, :wagon, :current_station, :route, :stations
+  attr_reader :speed, :wagon, :current_station, :route
   def initialize(number, type = 'пассажирский', wagon = 15)
     @number = number
     @type = type
@@ -27,8 +27,7 @@ class Train
 
   def setup_route(set_route)
     @route = set_route
-    @stations = @route.route
-    @current_station = @stations[0]
+    @current_station = @route.stations.first
   end
 # Let's check has been route setted or not.
 # If not returns message, if yes, returns - true
@@ -41,37 +40,37 @@ class Train
   end
   # Here we are setting previous station
   def previous_station
-    if @current_station == @stations.first
+    if @current_station == @route.stations.first
       @current_station
     else
-      @current_station = @stations[@stations.index(@current_station) - 1]
+      @current_station = @route.stations[@route.stations.index(@current_station) - 1]
     end
   end
   # Here we are setting next station
   def next_station
-    if @current_station == @stations.last
+    if @current_station == @route.stations.last
       @current_station
     else
-      @current_station = @stations[@stations.index(@current_station) + 1]
+      @current_station = @route.stations[@route.stations.index(@current_station) + 1]
     end
   end
 # Moving ahead if route is setted
   def ahead
     if self.route_check_true
-      if @current_station != @stations.last
-        @stations[@stations.index(@current_station)].departure(self)
+      if @current_station != @route.stations.last
+        @route.stations[@route.stations.index(@current_station)].departure(self)
         @current_station = next_station
-        @stations[@stations.index(@current_station)].coming(self)
+        @route.stations[@route.stations.index(@current_station)].coming(self)
       end
     end
   end
 # Moving back if route is setted
   def backward
     if self.route_check_true
-      if @current_station != @stations.first
-        @stations[@stations.index(@current_station)].departure(self)
+      if @current_station != @route.stations.first
+        @route.stations[@route.stations.index(@current_station)].departure(self)
         @current_station = previous_station
-        @stations[@stations.index(@current_station)].coming(self)
+        @route.stations[@route.stations.index(@current_station)].coming(self)
       end
     end
   end

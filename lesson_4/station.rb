@@ -19,10 +19,7 @@ end
 # Takes type of train and returns quantity (wich ones have same type)
 
 def type_qty(type)
-sum = 0
-  @trains.each do |train|
-  sum += 1  if type.include?(@train.type)
-  end
+  sum = @trains.count(type)
   if sum.zero?
     puts "В данный момент поездов с типом #{type} нет!"
   else
