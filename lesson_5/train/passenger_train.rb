@@ -5,12 +5,12 @@ class PassengerTrain < Train
     @wagons = []
     wagon.times { |x| @wagons << PassengerWagon.new() }
   end
-  def add_wagon
+  def add_wagon(new_wagon)
     if @speed.zero?
       @wagon += 1
-      @wagons << PassengerWagon.new()
+      @wagons << new_wagon
     else
-      nil
+      puts " Для добавления вагона остановите поезд!"
     end
   end
 
@@ -19,7 +19,7 @@ class PassengerTrain < Train
       @wagon -= 1
       @wagons.shift
     else
-      nil
+      puts " Для добавления вагона остановите поезд!"
     end
   end
 end
