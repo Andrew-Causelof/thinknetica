@@ -1,12 +1,11 @@
 
 # Class Train, describs what Train does
 class Train
-  attr_reader :speed, :wagon, :current_station, :route, :number, :type
-  def initialize(number, wagon = 15, type = 'пассажирский')
+  attr_reader :speed, :current_station, :route, :number, :wagons
+  def initialize(number)
     @number = number
-    @type = type
-    @wagon = wagon
     @speed = 0
+    @wagons = []
   end
 
   def braking
@@ -43,10 +42,8 @@ class Train
     if self.route_check_true
       if @current_station != @route.stations.last
         puts " Поезд уехал со станции #{@current_station}"
-        sleep(1)
         @current_station = next_station
         puts "Поезд прибыл на станцию #{@current_station}"
-        sleep(1)
       end
     end
   end
@@ -58,6 +55,22 @@ class Train
         @current_station = previous_station
         puts "Поезд прибыл на станцию #{@current_station}"
       end
+    end
+  end
+
+  def add_wagon(new_wagon)
+    if @speed.zero?
+      @wagons << new_wagon
+    else
+      puts " Для добавления вагона остановите поезд!"
+    end
+  end
+
+  def remove
+    if @speed.zero? && @wagons.length > 0
+      @wagons.shift
+    else
+      puts " Для добавления вагона остановите поезд!"
     end
   end
 

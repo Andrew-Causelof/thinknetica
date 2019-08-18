@@ -18,9 +18,9 @@ start.stations << Station.new('Pavlovsky Posad')
 start.routes << Route.new('PP',start.stations[0].name, start.stations[3].name)
 start.routes[0].add(start.stations[1].name)
 
-start.trains << PassengerTrain.new('К713', 15)
-start.trains << PassengerTrain.new('А45', 15)
-start.trains << CargoTrain.new(366, 40)
-start.trains << CargoTrain.new(577, 35)
+start.trains << PassengerTrain.new('К713')
+start.trains << PassengerTrain.new('А45')
+start.trains << CargoTrain.new(366)
+start.trains << CargoTrain.new(577)
 
 start.menu

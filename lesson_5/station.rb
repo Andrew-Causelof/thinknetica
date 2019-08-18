@@ -1,12 +1,9 @@
-
 class Station
-
-attr_reader :trains, :name
-
-def initialize(name)
-  @name = name
-  @trains = []
-end
+  attr_reader :trains, :name
+  def initialize(name)
+    @name = name
+    @trains = []
+  end
 
 def coming(train)
   @trains << train
@@ -15,7 +12,6 @@ end
 def departure(train)
   @trains.delete(train)
 end
-
 # Takes type of train and returns quantity (wich ones have same type)
 private
 

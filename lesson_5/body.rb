@@ -8,7 +8,7 @@ class Main
 # Основное меню -интерфейс для взаимодействия с оператором
   def menu
     loop do
-      system ("clear")
+      system("clear")
       puts 'Для выхода из программы нажмите ctrl+c или 8'
       puts 'Выберете номер из меню :'
       case choose_option
@@ -36,7 +36,7 @@ class Main
     puts '1 - Создать станции'
     puts '2 - Создать поезда'
     puts '3 - Создать маршруты и управлять станцими в нем (добавлять, удалять)'
-    puts '4 - Добавить вагоны к поезду'
+    puts '4 - Добавить вагон к поезду'
     puts '5 - Отцепить вагон от поезда'
     puts '6 - Переместить поезд по маршруту вперед / назад'
     puts '7 - Просмотреть список станций и список поездов на станции'
@@ -67,7 +67,13 @@ class Main
       train = gets.chomp.to_i
       puts 'Введите число вагонов:'
       wagons = gets.chomp.to_i
-      train == 1 ? @trains << PassengerTrain.new(number, wagons) : @trains << CargoTrain.new(number, wagons)
+      if train == 1
+      @trains << PassengerTrain.new(number)
+      wagons.times { |x| @trains.last.add_wagon(PassengerWagon.new())}
+      else
+      @trains << CargoTrain.new(number)
+      wagons.times { |x| @trains.last.add_wagon(CargoWagon.new())}
+      end
     end
   end
 # Создание маршрута, добавление, удаление станций из маршрута
@@ -124,35 +130,41 @@ class Main
   end
 # Метод добавляет вагон
   def add_wagons
-    if @trains.length >0
+    if @trains.length > 0
+      puts '1. Создать пассажирский вагон'
+      puts '2. Создать грузовой вагон'
+      wagon_choice = gets.chomp.to_i
+       if wagon_choice == 1
+          wagon = PassengerWagon.new()
+       else
+          wagon = CargoWagon.new()
+       end
       printout_trains
       read_train = gets.chomp.to_i
-  # Здесь
-    if @trains[read_train].class == CargoTrain
-      @trains[read_train].add_wagon(CargoWagon.new())
-    else
-      @trains[read_train].add_wagon(PassengerWagon.new())
-    end
-
-      puts 'Вагон добавлен'
-      print "Вагонов в поезде номер #{@trains[read_train].number} :"
-      puts "#{@trains[read_train].wagon}"
+      if @trains[read_train].class == CargoTrain && wagon.class == CargoWagon
+         @trains[read_train].add_wagon(CargoWagon.new())
+      elsif @trains[read_train].class == PassengerTrain && wagon.class == PassengerWagon
+         @trains[read_train].add_wagon(PassengerWagon.new())
+       else
+         puts 'Нельзя подцеплять грузовой вагон к пасажирксому поезду или'
+         puts 'пассажирский вагон к грузовому составу!'
+       end
     else
       puts 'Нет созданых поездов, к которым можно добавить вагоны'
     end
   end
 # Метод удаляет вагон
   def remove_wagons
-    if @trains.length > 0
-       printout_trains
-       read_train = gets.chomp.to_i
-       @trains[read_train].remove
-       puts 'Вагон удален'
-       print "Вагонов в поезде номер #{@trains[read_train].number} :"
-       puts "#{@trains[read_train].wagon}"
-    else
-      puts 'Нет созданых поездов, у которых можно отцепить вагоны'
-    end
+    printout_trains
+    read_train = gets.chomp.to_i
+      if @trains.length > 0 && @trains[read_train].wagons.length > 0
+         @trains[read_train].remove
+         puts 'Вагон удален'
+         print "Вагонов в поезде номер #{@trains[read_train].number} :"
+         puts "#{@trains[read_train].wagons.length}"
+      else
+        puts 'Нет созданых поездов, у которых можно отцепить вагоны'
+      end
   end
 # Метод перемещает поезда по маршруту, если не инициирован , то устанавливает
   def move_train
@@ -255,7 +267,7 @@ private
       @trains.each_index { |x|
       print "#{x}. Номер : #{@trains[x].number}, "
       print "Тип : #{@trains[x].type}, "
-      puts  "Вагонов в поезде : #{@trains[x].wagon}"
+      puts  "Вагонов в поезде : #{@trains[x].wagons.length}"
       }
     else
       puts "В списках нет ни одного поезда, необходимо создать!"
@@ -263,5 +275,4 @@ private
       self.menu
     end
   end
-
 end
