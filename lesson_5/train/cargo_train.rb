@@ -1,5 +1,5 @@
 class CargoTrain < Train
-  attr_reader :wagons
+
   def initialize(number, wagon, type = 'грузовой')
     super
     @wagons = []

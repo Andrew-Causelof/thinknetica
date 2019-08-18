@@ -1,5 +1,4 @@
 class PassengerTrain < Train
-  attr_reader :wagons
   def initialize(number, wagon, type = 'пассажирский')
     super
     @wagons = []
