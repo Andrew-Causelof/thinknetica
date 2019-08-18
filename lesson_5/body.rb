@@ -142,9 +142,9 @@ class Main
       printout_trains
       read_train = gets.chomp.to_i
       if @trains[read_train].class == CargoTrain && wagon.class == CargoWagon
-         @trains[read_train].add_wagon(CargoWagon.new())
+         @trains[read_train].add_wagon(wagon)
       elsif @trains[read_train].class == PassengerTrain && wagon.class == PassengerWagon
-         @trains[read_train].add_wagon(PassengerWagon.new())
+         @trains[read_train].add_wagon(wagon)
        else
          puts 'Нельзя подцеплять грузовой вагон к пасажирксому поезду или'
          puts 'пассажирский вагон к грузовому составу!'
