@@ -115,6 +115,7 @@ class Main
           @routes[revising_index].add(station)
           puts " Станция добавлена в маршрут, итоговый лист :"
           @routes[revising_index].stations.each { |x| puts "Станция #{x}" }
+          press_enter
         else
           system("clear")
           puts 'Выберете станцию которую удаляем:'
@@ -125,6 +126,7 @@ class Main
           station = @stations[read_station].name
           puts "Удаляем из маршрута #{@routes[revising_index].name} станцию #{station} "
           @routes[revising_index].delete(station)
+          press_enter
         end
     end
   end
@@ -141,16 +143,11 @@ class Main
        end
       printout_trains
       read_train = gets.chomp.to_i
-      if @trains[read_train].class == CargoTrain && wagon.class == CargoWagon
-         @trains[read_train].add_wagon(wagon)
-      elsif @trains[read_train].class == PassengerTrain && wagon.class == PassengerWagon
-         @trains[read_train].add_wagon(wagon)
-       else
-         puts 'Нельзя подцеплять грузовой вагон к пасажирксому поезду или'
-         puts 'пассажирский вагон к грузовому составу!'
-       end
+      @trains[read_train].add_wagon(wagon)
+      press_enter    
     else
       puts 'Нет созданых поездов, к которым можно добавить вагоны'
+      press_enter
     end
   end
 # Метод удаляет вагон
@@ -162,8 +159,10 @@ class Main
          puts 'Вагон удален'
          print "Вагонов в поезде номер #{@trains[read_train].number} :"
          puts "#{@trains[read_train].wagons.length}"
+         press_enter
       else
         puts 'Нет созданых поездов, у которых можно отцепить вагоны'
+        press_enter
       end
   end
 # Метод перемещает поезда по маршруту, если не инициирован , то устанавливает
@@ -186,6 +185,7 @@ class Main
         station_add_train(read_train)
       else
         puts 'Не корректный выбор'
+        press_enter
       end
 
     else
@@ -199,11 +199,12 @@ class Main
     stations.each { |x|
       puts " На станции #{x.name} поезда : "
       if x.trains.length > 0
-        x.trains.each { |train| print " Поезд с номером : #{train.number}" }
+        x.trains.each { |train| puts " Поезд с номером : #{train.number}" }
       else
         puts " Поездов нет"
       end
     }
+    press_enter
   end
 
 
@@ -274,5 +275,9 @@ private
       self.create_trains
       self.menu
     end
+  end
+  def press_enter
+    puts 'Для продолжения нажмите enter'
+    gets
   end
 end
