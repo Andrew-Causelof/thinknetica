@@ -75,27 +75,15 @@ class Train
   end
 
   def add_wagon(new_wagon)
-    if @speed.zero?
-      @wagons << new_wagon
-    else
-      puts " Для добавления вагона остановите поезд!"
-    end
+    @wagons << new_wagon if @speed.zero?
   end
 
   def remove
-    if @speed.zero? && @wagons.length > 0
-      @wagons.shift
-    else
-      puts " Для добавления вагона остановите поезд!"
-    end
+    @wagons.shift if @speed.zero? && @wagons.length > 0
   end
 
   def route_check_true
-    if @route.nil?
-      puts 'Маршрут не установлен!!!'
-    else
-      true
-    end
+    @route.nil? ? false : true
   end
 
   private

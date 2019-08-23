@@ -196,9 +196,6 @@ class Main
         station_delete_train(read_train)
         @trains[read_train].backward
         station_add_train(read_train)
-      else
-        puts 'Не корректный выбор'
-        press_enter
       end
 
     else
@@ -214,7 +211,7 @@ class Main
       if x.trains.length > 0
         x.trains.each { |train| puts " Поезд с номером : #{train.number}" }
       else
-        puts " Поездов нет"
+        puts ' Поездов нет'
       end
     }
     press_enter

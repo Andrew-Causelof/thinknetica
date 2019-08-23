@@ -6,10 +6,6 @@ class PassengerTrain < Train
   end
 
   def add_wagon(wagon)
-    if wagon.type == @type
-      super
-    else
-      puts 'Нельзя подцеплять грузовой вагон к пассажирскому поезду'
-    end
+    super if wagon.type == @type
   end
 end
