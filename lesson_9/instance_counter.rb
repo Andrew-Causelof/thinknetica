@@ -1,4 +1,4 @@
-#InstanceCount Module has been described here
+# InstanceCount Module has been described here
 module InstanceCount
   def self.included(base)
     base.extend ClassMethods

@@ -10,7 +10,7 @@ class PassengerTrain < Train
   end
 
   def print_out_passenger_wagon
-    self.each_wagon do |wagon|
+    each_wagon do |wagon|
       print "#{wagon.type} "
       print " вагон: #{wagon.name}"
       puts " в котором #{wagon.seats} мест, из которых"

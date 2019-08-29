@@ -49,8 +49,6 @@ class Station
   end
 
   def validate!
-    if @name !~ FORMAT_STATION
-      raise ArgumentError, 'Название содержит только буквы длиной более 3х'
-    end
+    raise ArgumentError, 'Название содержит только буквы длиной более 3х' if @name !~ FORMAT_STATION
   end
 end

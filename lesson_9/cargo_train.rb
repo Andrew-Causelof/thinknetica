@@ -12,7 +12,7 @@ class CargoTrain < Train
   end
 
   def print_out_cargo_wagon
-    self.each_wagon do |wagon|
+    each_wagon do |wagon|
       print "#{wagon.type} "
       print " вагон: #{wagon.name}"
       puts " в котором #{wagon.capacity} кубических метров, из которых"

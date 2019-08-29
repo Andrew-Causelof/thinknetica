@@ -1,3 +1,4 @@
+# Validator module
 module Validator
   def valid?
     validate!
@@ -8,6 +9,5 @@ module Validator
 
   private
 
-  def validate!
-  end
+  def validate!; end
 end

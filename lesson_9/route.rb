@@ -17,9 +17,7 @@ class Route
   end
 
   def delete(station)
-    if station != @stations.first && station != @stations.last
-      @stations.delete(station)
-    end
+    @stations.delete(station) if station != @stations.first && station != @stations.last
   end
 
   def add(station, previous_station = @stations.first)
@@ -31,8 +29,6 @@ class Route
   end
 
   def validate!
-    if @name !~ FORMAT_ROUTE
-      raise ArgumentError, 'Название содержит только буквы длиной более 3х'
-    end
+    raise ArgumentError, 'Название содержит только буквы длиной более 3х' if @name !~ FORMAT_ROUTE
   end
 end

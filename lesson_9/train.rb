@@ -1,4 +1,3 @@
-
 require_relative './factory.rb'
 require_relative './instance_counter.rb'
 require_relative './validator.rb'
@@ -43,30 +42,26 @@ class Train
 
   # Here we are setting previous station
   def previous_station
-    unless @current_station == @route.stations.first
-      @current_station = @route.stations[@route.stations.index(@current_station) - 1]
-    end
+    shift_station(-1) if @current_station != @route.stations.first
   end
 
   # Here we are setting next station
   def next_station
-    unless @current_station == @route.stations.last
-      @current_station = @route.stations[@route.stations.index(@current_station) + 1]
-    end
+    shift_station(1) if @current_station != @route.stations.last
+  end
+
+  def shift_station(index)
+    @current_station = @route.stations[@route.stations.index(@current_station) + index]
   end
 
   # Moving ahead if route is setted
   def ahead
-    if self.route_check_true && @current_station != @route.stations.last
-      @current_station = next_station
-    end
+    @current_station = next_station if route_check_true && @current_station != @route.stations.last
   end
 
-# Moving back if route is setted
+  # Moving back if route is setted
   def backward
-    if self.route_check_true && @current_station != @route.stations.first
-      @current_station = previous_station
-    end
+    @current_station = previous_station if route_check_true && @current_station != @route.stations.first
   end
 
   def add_wagon(new_wagon)

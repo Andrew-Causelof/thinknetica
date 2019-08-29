@@ -21,7 +21,7 @@ module Printout
 
   # List out trains for the further
   def printout_trains(trains)
-    system("clear")
+    system('clear')
     if !trains.empty?
       puts 'Выберете поезд из списка:'
       trains.each_index do |x|
@@ -37,7 +37,7 @@ module Printout
   # List out Stations for the further
   def printout_stations_by_number(stations)
     if stations.size <= 1
-      system("clear")
+      system('clear')
       puts 'Не достаточно станций для работы с  маршрутом'
     else
       stations.each_index { |x| puts "#{x}. Станция : #{self.stations[x].name}" }
@@ -47,7 +47,7 @@ module Printout
   # List out routes for the further
   def printout_routes(routes)
     if routes.empty?
-      puts "Нет маршрутов для редактирования"
+      puts 'Нет маршрутов для редактирования'
     else
       routes.each_index { |x| puts "#{x}. Маршрут : #{routes[x].name}" }
     end
@@ -55,7 +55,7 @@ module Printout
 
   # Method prints Stations, and trains/wagons that came
   def printout_data_for_stations(stations)
-    system("clear")
+    system('clear')
     stations.each do |x|
       puts " На станции #{x.name} поезда : "
       if !x.trains.empty?
@@ -63,10 +63,10 @@ module Printout
           print " Поезд с номером : #{train.number}, "
           print " Тип : #{train.type}, "
           puts " Вагонов : #{train.wagons.size}"
-            if !train.wagons.empty?
-              train.print_out_passenger_wagon if train.type == 'пассажирский'
-              train.print_out_cargo_wagon if train.type == 'грузовой'
-            end
+          unless train.wagons.empty?
+            train.print_out_passenger_wagon if train.type == 'пассажирский'
+            train.print_out_cargo_wagon if train.type == 'грузовой'
+          end
         end
       else
         puts ' Поездов нет'
