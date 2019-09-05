@@ -1,22 +1,26 @@
 # Accesor class, keep recording datas for named variables
 module Accessors
-  attr_reader :store_variable
-  @store_variable ||= {}
-
   def attr_accessor_with_history(*args)
-    puts @store_variable
-    puts args.size
-    sleep(1)
     args.each do |name|
+      puts "Вошло имя #{name}"
+      #Guard clause
       raise 'значение не символ' unless name.is_a? Symbol
-      getter(name)
+      puts "#{name} прошло проверку :"
+      #getter for instance variable
+      attr_reader name
+      puts "#{name} сработал геттер"
+      history = "@#{name}_history"
+      #setter method for instance variable + setup history method
       define_method("#{name}=") do |v|
-        setup_variable(name, v) if @store_variable[name] != v
-        instance_variable_set("@#{name}", v)
+        if instance_variable_defined?(history)
+          array = instance_variable_get(history)
+        else
+          array = []
+        end
+        instance_variable_set(name, v)
+        instance_variable_set(history, array << v )
       end
-      #define_method("#{name}_history") do
-      #  @store_variable[name]
-      #end
+      define_method(history) { instance_variable_get(history) }
     end
   end
 
@@ -27,20 +31,18 @@ module Accessors
       instance_variable_set("@#{name}", v)
     end
   end
-
-  private
-
-  def getter(name)
-    define_method(name) do
-      instance_variable_get("@#{name}")
-    end
-  end
-
-  def setup_variable(name, value)
-    puts "выводим хэш #{@store_variable}"
-    store = []
-    store << @store_variable[name]
-    store << value
-    @store_variable[name] = store
-  end
 end
+
+class Test
+  extend Accessors
+  attr_accessor_with_history :smth, :smthelse, :smthmore
+end
+
+ test = Test.new
+ test.smth = 1
+ test.smth = 3
+ test.smth = 5
+ test.smthelse = 2
+ test.smthmore = 3
+
+ puts test.smth_history
