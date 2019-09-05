@@ -13,8 +13,8 @@ class Route
 
   attr_reader :stations, :name, :first_station, :last_station
 
-  validate :first_station, :type, String
-  validate :last_station, :type, String
+  validate :first_station, :validate_type, String
+  validate :last_station, :validate_type, String
 
   def initialize(name, begins, ends)
     @first_station = begins

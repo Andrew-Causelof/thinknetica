@@ -1,5 +1,5 @@
-include Validation
 class PassengerTrain < Train
+  include Validation
   attr_reader :type
   validate :number, :format, FORMAT_TRAIN
   def initialize(number)

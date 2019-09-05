@@ -1,7 +1,7 @@
 # CargoTrain contains methods for cargo trains, cos we have 2 kind of trains
 # we had to separate it by 2 classes, Cargo and PassengerTrain
-include Validation
 class CargoTrain < Train
+  include Validation
   attr_reader :type
   validate :number, :format, FORMAT_TRAIN
   def initialize(number)

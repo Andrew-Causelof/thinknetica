@@ -4,7 +4,6 @@ class Main
   include Printout
   extend Accessors
   attr_reader :stations, :trains, :routes
-  #strong_attr_accessor :smth, :else
   def initialize
     @stations = []
     @trains   = []

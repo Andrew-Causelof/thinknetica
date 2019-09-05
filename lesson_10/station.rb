@@ -14,7 +14,7 @@ class Station
 
   @@stations ||= []
 
-  validate :name, :presence
+  validate :name, :validate_presence
 
   def self.all
     @@stations
@@ -52,8 +52,4 @@ class Station
       puts " В данный момент поездов с типом #{type} : #{sum}"
     end
   end
-
-#  def validate!
-#    raise ArgumentError, 'Название содержит только буквы длиной более 3х' if @name !~ FORMAT_STATION
-#  end
 end

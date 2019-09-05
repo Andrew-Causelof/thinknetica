@@ -1,0 +1,26 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+Style/Documentation:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 60
+Style/AsciiComments:
+  Enabled: false
+Style/MutableConstant:
+  Enabled: false
+Style/BlockComments:
+  Enabled: false
+Metrics/ClassLength:
+  Max: 300
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/PerceivedComplexity:
+  Max: 15
+Style/ClassVars:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Lint/UselessAssignment:
+  Enabled: false

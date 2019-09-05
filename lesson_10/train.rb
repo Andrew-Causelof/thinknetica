@@ -16,7 +16,7 @@ class Train
   include Validation
   @@trains ||= {}
 
-  validate :number, :format, FORMAT_TRAIN
+  validate :number, :validate_format, FORMAT_TRAIN
 
   def self.find(number)
     @@trains[number]
@@ -84,10 +84,4 @@ class Train
   def route_check_true
     @route.nil? ? false : true
   end
-
-  private
-
-#  def validate!
-#    raise ArgumentError, 'Не верный формат поезда' if @number !~ FORMAT_TRAIN
-#  end
 end

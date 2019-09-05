@@ -7,33 +7,28 @@ module Validation
   module ClassMethods
     attr_reader :attributes
 
-    def validate(*args)
+    def validate(name, type, *format)
       @attributes ||= []
-      @attributes << args
+      @attributes << { type: type, name: name, format: format }
     end
   end
 
   module InstanceMethods
-    def presence(value)
+    def validate_presence(value)
       raise 'Значение nil или пустая строка!' if value.to_s.empty?
     end
 
-    def format(value, expectation)
+    def validate_format(value, expectation)
       raise 'Значение не соответствует выражению!' if value !~ expectation
     end
 
-    def type(value, type)
+    def validate_type(value, type)
       raise 'Не совпадает класс!!!' unless value.is_a? type
     end
 
     def validate!
-      temp = self.class.attributes
-      temp.each do |value|
-        if value[1] == :presence
-          send(value[1], instance_variable_get("@#{value[0]}"))
-        else
-          send(value[1], instance_variable_get("@#{value[0]}"), value[2])
-        end
+      self.class.attributes.each do |value|
+        send(value[:type], instance_variable_get("@#{value[:name]}"), *value[:format])
       end
     end
 

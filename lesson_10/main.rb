@@ -21,17 +21,4 @@ start.trains << CargoTrain.new('п22-01')
 start.trains << CargoTrain.new('пf3-02')
 40.times { start.trains.last.add_wagon(CargoWagon.new) }
 
-# accessors.rb we are going to test right here, look below :
-class Test_accessor
-  extend Accessors
-  attr_accessor_with_history :smth, :smthelse, :smthmore, :smthbig
-end
-
-a = Test_accessor.new
-#a.smth = 1
-#a.smth = 2
-#a.smth = 3
-puts _a.smth
-gets
-
 start.menu
