@@ -6,7 +6,7 @@ module Accessors
       raise 'значение не символ' unless name.is_a? Symbol
 
       # Setter for instance variable
-      attr_reader name
+      attr_reader name, "#{name}_history"
       # Setter method for instance variable + setup history method
       define_method("#{name}=") do |v|
         if instance_variable_defined?("@#{name}_history")
@@ -17,19 +17,12 @@ module Accessors
         end
         instance_variable_set("@#{name}", v)
       end
-      define_method("#{name}_history") do
-        instance_variable_get("@#{name}_history")
-      end
     end
   end
 
   def strong_attr_accessor(name, type)
     raise 'Не совпадает класс!!!' unless name.is_a?(type)
 
-    getter(name)
-    define_method("#{name}=") do |v|
-      instance_variable_set("@#{name}", v)
-    end
   end
 end
 
